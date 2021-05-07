@@ -1,24 +1,30 @@
 import express from 'express'
-import userRoute from './routes/userRoute'
+import publicRoute from './public'
+import cors from 'cors';
+import { swaggerOptions } from './src/config/setting';
 
 const app = express();
+const expressSwagger = require('express-swagger-generator')(app);
 
-
-app.use(express.urlencoded({extended: true}))
+app.use(cors());
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
 // home
-app.get('/', (req, res) => {
-  res.send("hello");
+app.get('/run', (req, res) => {
+  res.send("run");
 })
 
 //route path
-app.use('/user', userRoute);
+app.use('/public', publicRoute);
 
 
 
-app.use((req, res, next) => {
-  res.status(404).json('Not Found')
-});
+// app.use((req, res, next) => {
+//   res.status(404).json('Not Found')
+// });
+
+expressSwagger(swaggerOptions);
 
 // listen
 const porta = process.env.PORT || 8080

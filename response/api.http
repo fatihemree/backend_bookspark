@@ -5,17 +5,16 @@
 GET {{host}} HTTP/1.1
 
 ###
-POST {{host}}/user/register HTTP/1.1
+POST {{host}}/public/v1/user/register HTTP/1.1
 content-type: application/json
 
   {
-
     "emailVerified": false,
-    "phoneNumber": "+11234567860",
-    "email": "abc@a.com",
+    "phoneNumber": "+11234567861",
+    "email": "abcf@a.com",
     "password": "secretPassword",
     "displayName": "John Doe",
     "photoURL": "http://www.example.com/12345678/photo.png",
     "disabled": false
-
   }
+  ###

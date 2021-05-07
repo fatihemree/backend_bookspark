@@ -8,20 +8,34 @@ function validateError(error) {
   })
 }
 
-export function userRegisterValidation(object) {
+export const userRegisterValidation = (object) => {
   const userRegister = Joi.object({
-emailVerified: Joi.boolean().required(),
-email: Joi.string().email().required(),
-phoneNumber: Joi.string().required(),
-password: Joi.string().required(),
-displayName: Joi.string().required(),
-photoURL: Joi.string().required(),
-disabled: Joi.boolean().required(),
+    emailVerified: Joi.boolean().required(),
+    email: Joi.string().email().required(),
+    phoneNumber: Joi.string().required(),
+    password: Joi.string().required(),
+    displayName: Joi.string().required(),
+    photoURL: Joi.string().required(),
+    disabled: Joi.boolean().required(),
   })
 
-  // const schema = Joi.object(userRegister)
-
   const result = userRegister.validate(object, { abortEarly: false })
+  if (result.error) {
+    return {
+      res: false,
+      err: {
+        // eslint-disable-next-line no-underscore-dangle
+        message: result.error.message,
+        value: result.error.details[0].context.value,
+      },
+    }
+  }
+  return { res: true }
+}
+
+export const emailValidate = (email) => {
+  const scheme = Joi.string().email().required()
+  const result = scheme.validate(email)
   if (result.error) {
     return {
       res: false,
