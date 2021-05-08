@@ -56,7 +56,7 @@ export default class UserController {
 
   static async delete(req, res) {
     try {
-      const user = req.body
+      const user = req.params.uid
       const result = await userServices.delete(user)
       util.setSuccess(200, 'delete succesfull', result)
       return util.send(res)
@@ -77,16 +77,12 @@ export default class UserController {
    */
 
   static async update(req, res) {
+
     try {
-      const uid = req.match.uid
-      const user = req.body
-      const validate = userRegisterValidation(user)
-      if (!validate.res) {
-        util.setError(200, validate.err)
-        return util.send(res)
-      }
+      const [uid, user] = [req.params.uid, req.body]
+
       const result = await userServices.update(user, uid)
-      util.setSuccess(200, 'Update succesfulf', result)
+      util.setSuccess(200, 'Update succesful', result)
       return util.send(res)
     }
     catch (err) {
@@ -97,7 +93,7 @@ export default class UserController {
 
   static async emailFind(req, res) {
     try {
-      const user = req.match.email
+      const user = req.params.email
       const validate = emailValidate(user)
       if (!validate.res) {
         util.setError(200, validate.err)
@@ -115,14 +111,8 @@ export default class UserController {
 
   static async allUsers(req, res) {
     try {
-      const user = req.body
-      const validate = userRegisterValidation(user)
-      if (!validate.res) {
-        util.setError(200, validate.err)
-        return util.send(res)
-      }
       const result = await userServices.allUser()
-      util.setSuccess(200, 'all users list', result.toJSO())
+      util.setSuccess(200, 'all users list', result)
       return util.send(res)
     }
     catch (err) {
