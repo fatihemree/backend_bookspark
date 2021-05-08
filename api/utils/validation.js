@@ -22,7 +22,7 @@ export const userRegisterValidation = (object) => {
     disabled: Joi.boolean().required(),
   })
 
-  const result = user .validate(object, { abortEarly: false })
+  const result = userRegister.validate(object, { abortEarly: false })
   if (result.error) {
     return {
       res: false,
