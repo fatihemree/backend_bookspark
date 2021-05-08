@@ -1,5 +1,5 @@
 import express from 'express'
-import userController from '../controllers/userController'
+import userController from '../controller/userController'
 
 const app = express()
 app.post('/register', userController.register)

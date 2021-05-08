@@ -1,11 +1,11 @@
 @host= http://localhost:8080
-# @query=?long=39.25322010853384&lat=33.24331911328855
+@publicUser={{host}}/public/v1/user
 ###
 
 GET {{host}} HTTP/1.1
 
 ###
-POST {{host}}/public/v1/user/register HTTP/1.1
+POST {{publicUser}}/register HTTP/1.1
 content-type: application/json
 
   {
@@ -17,4 +17,9 @@ content-type: application/json
     "photoURL": "http://www.example.com/12345678/photo.png",
     "disabled": false
   }
-  ###
+###
+
+GET {{publicUser}}/allUsers HTTP/1.1
+content-type: application/json
+
+###

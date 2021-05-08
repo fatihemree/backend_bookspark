@@ -8,6 +8,9 @@ function validateError(error) {
   })
 }
 
+/*
+*   ---------------------  user register & update validate  ---------------------
+*/
 export const userRegisterValidation = (object) => {
   const userRegister = Joi.object({
     emailVerified: Joi.boolean().required(),
@@ -19,7 +22,7 @@ export const userRegisterValidation = (object) => {
     disabled: Joi.boolean().required(),
   })
 
-  const result = userRegister.validate(object, { abortEarly: false })
+  const result = user .validate(object, { abortEarly: false })
   if (result.error) {
     return {
       res: false,
@@ -32,6 +35,10 @@ export const userRegisterValidation = (object) => {
   }
   return { res: true }
 }
+
+/*
+*   ---------------------  email validate  ---------------------
+*/
 
 export const emailValidate = (email) => {
   const scheme = Joi.string().email().required()
@@ -49,18 +56,19 @@ export const emailValidate = (email) => {
   return { res: true }
 }
 
-
-// export function isPersoneId(personelId) {
-//   const idArray = Joi.array().items(Joi.number().required())
-//   const result = idArray.validate(personelId, { abortEarly: false })
+// export const emailValidate = (email) => {
+//   const scheme = Joi.string().email().required()
+//   const result = scheme.validate(email)
 //   if (result.error) {
-//     const value = result.error.details[0].context.value
-//     const key = result.error.details[0].context.key
-
 //     return {
 //       res: false,
-//       err: `id should be in string not number => value: "${value}" key: "${key}"`,
+//       err: {
+//         // eslint-disable-next-line no-underscore-dangle
+//         message: result.error.message,
+//         value: result.error.details[0].context.value,
+//       },
 //     }
 //   }
 //   return { res: true }
 // }
+
