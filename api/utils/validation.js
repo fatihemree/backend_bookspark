@@ -37,6 +37,29 @@ export const userRegisterValidation = (object) => {
 }
 
 /*
+*   ---------------------  user login  ---------------------
+*/
+export const userLoginValidation = (object) => {
+  const userRegister = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  })
+
+  const result = userRegister.validate(object, { abortEarly: false })
+  if (result.error) {
+    return {
+      res: false,
+      err: {
+        // eslint-disable-next-line no-underscore-dangle
+        message: result.error.message,
+        value: result.error.details[0].context.value,
+      },
+    }
+  }
+  return { res: true }
+}
+
+/*
 *   ---------------------  email validate  ---------------------
 */
 

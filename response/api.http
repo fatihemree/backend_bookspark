@@ -5,15 +5,27 @@
 GET {{host}} HTTP/1.1
 
 ###
+POST {{publicUser}}/login HTTP/1.1
+content-type: application/json
+
+  {
+    "email": "fatih@gmail.com",
+    "password": "123456"
+  }
+
+###
+GET {{publicUser}}/signout HTTP/1.1
+
+###
 POST {{publicUser}}/register HTTP/1.1
 content-type: application/json
 
   {
     "emailVerified": false,
-    "phoneNumber": "+11234567861",
-    "email": "abcf@a.com",
-    "password": "secretPassword",
-    "displayName": "John Doe",
+    "phoneNumber": "+11234567862",
+    "email": "fatih@gmail.com",
+    "password": "123456",
+    "displayName": "test",
     "photoURL": "http://www.example.com/12345678/photo.png",
     "disabled": false
   }
