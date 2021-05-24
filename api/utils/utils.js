@@ -11,9 +11,9 @@ export default class Util {
   setErrorFirebase(res,error){
     if (error.response) {
       // Request made and server responded
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
+      // console.log(error.response.data);
+      // console.log(error.response.status);
+      // console.log(error.response.headers);
     util.setError(error.status, error.data)
 
     } else if (error.request) {
@@ -22,7 +22,7 @@ export default class Util {
 
     } else {
       // Something happened in setting up the request that triggered an Error
-    console.log('Error:', error.message)
+    // console.log('Error:', error.message)
     util.setError(200, error.message)
     }
     return util.send(res)

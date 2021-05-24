@@ -43,6 +43,7 @@ export default class UserController {
       //   return util.send(res)
       // }
       const result = await userServices.signOut(user)
+
       util.setSuccess(200, 'signout success', result)
 
       return util.send(res)
@@ -73,9 +74,9 @@ export default class UserController {
       return util.send(res)
     }
     catch (error) {
-      util.setErrorFirebase(res,error)
+      util.setErrorFirebase(res, error)
+    }
   }
-}
 
   /**
    * @route POST /public/v1/User/register
@@ -88,19 +89,29 @@ export default class UserController {
   static async register(req, res) {
     try {
       const user = req.body
+
       const validate = userRegisterValidation(user)
       if (!validate.res) {
         util.setError(200, validate.err)
         return util.send(res)
       }
       const result = await userServices.register(user)
-      util.setSuccess(200, 'save created', result)
-
+      const userData = {
+        email: result.email,
+        emailVerified: result.emailVerified,
+        displayName: result.displayName,
+        photoURL: result.photoURL,
+        phoneNumber: result.phoneNumber
+      }
+      const saveResult = await userServices.userSave(result.uid, userData)
+      util.setSuccess(200, 'save created', saveResult)
       return util.send(res)
     }
     catch (err) {
-      util.setError(200, err)
+      // console.log(err)
+      util.setError(404, err)
       return util.send(res)
+      // return util.setErrorFirebase(res,err)
     }
   }
 

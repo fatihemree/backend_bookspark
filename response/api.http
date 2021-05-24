@@ -34,8 +34,8 @@ content-type: application/json
 
   {
     "emailVerified": false,
-    "phoneNumber": "+11234567862",
-    "email": "fatih@gmail.com",
+    "phoneNumber": "+245555678634",
+    "email": "asasserCreatea@gmail.com",
     "password": "123456",
     "displayName": "test",
     "photoURL": "http://www.example.com/12345678/photo.png",
