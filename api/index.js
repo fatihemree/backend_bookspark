@@ -1,5 +1,6 @@
 import express from 'express'
 import publicRoute from './public'
+import privateRoute from './private'
 import cors from 'cors';
 import { swaggerOptions } from './src/config/setting';
 
@@ -17,6 +18,7 @@ app.get('/run', (req, res) => {
 
 //route path
 app.use('/public', publicRoute);
+app.use('/private', privateRoute);
 
 
 

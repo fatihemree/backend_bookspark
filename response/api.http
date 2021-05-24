@@ -1,8 +1,20 @@
 @host= http://localhost:8080
 @publicUser={{host}}/public/v1/user
+@privateUser={{host}}/private/v1/user
 ###
 
+@idToken= eyJhbGciOiJSUzI1NiIsImtpZCI6IjUzNmRhZWFiZjhkZDY1ZDRkZTIxZTgyNGI4OTlhMWYzZGEyZjg5NTgiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoidGVzdCIsInBpY3R1cmUiOiJodHRwOi8vd3d3LmV4YW1wbGUuY29tLzEyMzQ1Njc4L3Bob3RvLnBuZyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9ib29rbWFyay1iMDMwMCIsImF1ZCI6ImJvb2ttYXJrLWIwMzAwIiwiYXV0aF90aW1lIjoxNjIxMTkwMzczLCJ1c2VyX2lkIjoibmVVdTZMN2FNN1V0eFZYNFlFQlpuWU1aeU9BMiIsInN1YiI6Im5lVXU2TDdhTTdVdHhWWDRZRUJabllNWnlPQTIiLCJpYXQiOjE2MjExOTAzNzMsImV4cCI6MTYyMTE5Mzk3MywiZW1haWwiOiJmYXRpaEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlciI6IisxMTIzNDU2Nzg2MiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsicGhvbmUiOlsiKzExMjM0NTY3ODYyIl0sImVtYWlsIjpbImZhdGloQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.PGlcQggrDuKMITyo2MQfXvJuR6Lw0aGH-JC30uoyxU5kpmcNJhq0BTkAs6V8fU87GJKSt3rnwXqDSlkA6-UeppBBsuDWUvbBrQIvIuJunAEvq3Ue2XojyjXAeifeCkzEMdAuXUZt6uSBrCypLH8hgFd8IaMCJexdaQEV9caQfVTZSxIlUjlZQ-LijW7SdoHJAHy3Jq5t6iGUGKmLU6IfMPOA6zZFZgZ9F90myY-BunEMRzA7ZmiYveWWYo5TFGkJAeUoOuOGOKPJTaccfIBvDVRk0-UmuREhLSG0m5-ks6RLUl2uuucmmTCUaES0pwmTxbO0FiwTh3AU0uBhYwonIg
+
 GET {{host}} HTTP/1.1
+
+###
+GET {{privateUser}}/info HTTP/1.1
+content-type: application/json
+authorization: {{idToken}}
+  # {
+  #   "email": "fatih@gmail.com",
+  #   "password": "123456"
+  # }
 
 ###
 POST {{publicUser}}/login HTTP/1.1
