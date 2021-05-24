@@ -73,22 +73,9 @@ export default class UserController {
       return util.send(res)
     }
     catch (error) {
-      if (error.response) {
-        // Request made and server responded
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.log(error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log('Error', error.message);
-      }
-      // util.setError(200, err.response)
-      // return util.send(res)
-    }
+      util.setErrorFirebase(res,error)
   }
+}
 
   /**
    * @route POST /public/v1/User/register

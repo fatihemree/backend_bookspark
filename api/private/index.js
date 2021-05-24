@@ -9,7 +9,7 @@ const utils = new Utils();
 app.use(async (req, res, next) => {
 
     const uid = req.headers.authorization;
-    console.log(uid)
+    // console.log(uid)
     try {
         const result = await admin.auth().verifyIdToken(uid)
         if (result) next()
