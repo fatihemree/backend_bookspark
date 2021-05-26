@@ -20,7 +20,6 @@ export default class UserSevice {
             .verifyIdToken(users)
     }
     static async delete(...users) {
-        console.log(users)
         return await admin
             .auth()
             .deleteUsers(users)

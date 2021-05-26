@@ -1,5 +1,6 @@
 @host= http://localhost:8080
 @publicUser={{host}}/public/v1/user
+@publicBook={{host}}/public/v1/book
 @privateUser={{host}}/private/v1/user
 ###
 
@@ -7,6 +8,12 @@
 
 GET {{host}} HTTP/1.1
 
+
+
+###
+GET {{publicBook}}/trend HTTP/1.1
+###
+GET {{publicBook}}/search?q=icimizdeki HTTP/1.1
 ###
 GET {{privateUser}}/info HTTP/1.1
 content-type: application/json
