@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-
 import Helpers from '../utils/helpers';
 
 const app = express();

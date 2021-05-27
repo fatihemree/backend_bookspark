@@ -37,11 +37,10 @@ export default class UserController {
     static async info(req, res) {
         try {
             const result =await userServices.info(req.headers.authorization)
-            console.log(result)
-            util.setSuccess(200, result)
+            res.send(req.locals)
+            util.setSuccess(200, req.locals)
             util.send(res);
         } catch (error) {
-            console.log(error.response)
             util.setErrorFirebase(res,error)
         }
     }

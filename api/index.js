@@ -3,6 +3,7 @@ import publicRoute from './public'
 import privateRoute from './private'
 import cors from 'cors';
 import { swaggerOptions } from './src/config/setting';
+import session from 'express-session'
 
 const app = express();
 const expressSwagger = require('express-swagger-generator')(app);
@@ -10,7 +11,11 @@ const expressSwagger = require('express-swagger-generator')(app);
 app.use(cors());
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
+app.use(session({
+  secret: 'privateKey',
+  resave: false,
+  saveUninitialized: true
+}));
 // home
 app.get('/run', (req, res) => {
   res.send("run");
