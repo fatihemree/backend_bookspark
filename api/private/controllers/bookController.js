@@ -7,23 +7,26 @@ export default class BoookController {
 
     static async saveBook(req, res) {
         try {
-            // console.log(req.session.uid)
+            const { isbn, ...bookDetail } = req.body
+            console.log('isbn', isbn, 'bookDetail', bookDetail);
+            const validate = userLoginValidation(bookDetail)
+            if (!validate.res) {
+                util.setError(200, validate.err)
+                return util.send(res)
+            }
             const result = await BookService.saveBook(req.session.uid, isbn, bookDetail)
-            util.setSuccess(200, 'kitap verisi', result.data)
+            util.setSuccess(200, 'kitap verisi eklendi', result.data)
             util.send(res)
         } catch (error) {
             util.setErrorFirebase(res, error)
         }
     }
+
     static async allBook(req, res) {
         try {
             const result = await BookService.allBook(req.session.uid)
-            if (result.length > 0) {
-                console.log(result)
-            }
-            // result.map(item => console.log(item.id))
-            // util.setSuccess(200, 'kitap verisi', result.data())
-            // util.send(res)
+            if (result.length > 0)
+                util.setSuccess(res, 'Tüm Kitaplar', result)
         } catch (error) {
             console.log(error)
             util.setErrorFirebase(res, error)

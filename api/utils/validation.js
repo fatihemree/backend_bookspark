@@ -79,19 +79,35 @@ export const emailValidate = (email) => {
   return { res: true }
 }
 
-// export const emailValidate = (email) => {
-//   const scheme = Joi.string().email().required()
-//   const result = scheme.validate(email)
-//   if (result.error) {
-//     return {
-//       res: false,
-//       err: {
-//         // eslint-disable-next-line no-underscore-dangle
-//         message: result.error.message,
-//         value: result.error.details[0].context.value,
-//       },
-//     }
-//   }
-//   return { res: true }
-// }
+/*
+*   ---------------------  bookSave  ---------------------
+*/
+export const bookSaveValidation = (object) => {
+  const bookSave = Joi.object({
+    isReadyPage: Joi.array().items(Joi.object({
+      date: Joi.date().required(),
+      pageNumber: Joi.number().required()
+    })),
+    status: Joi.number().required(),
+    startDate: Joi.date().required(),
+    endDate: Joi.date().required(),
+  })
+
+  const result = bookSave.validate(object, { abortEarly: false })
+  if (result.error) {
+    return {
+      res: false,
+      err: {
+        // eslint-disable-next-line no-underscore-dangle
+        message: result.error.message,
+        value: result.error.details[0].context.value,
+      },
+    }
+  }
+  return { res: true }
+}
+
+/*
+*   ---------------------  bookupdate  ---------------------
+*/
 

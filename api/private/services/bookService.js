@@ -2,6 +2,7 @@
 import admin from '../../utils/firebase_config'
 // import { SCRAPY_API_URL } from '../../utils/constant'
 import publibBookService from '../../public/services/bookService'
+const FieldValue = admin.firestore.FieldValue;
 export default class BookService {
 
     static async saveBook(uid, isbn, bookDetail) {
@@ -20,7 +21,7 @@ export default class BookService {
         const result = await admin
             .firestore()
             .collection('users')
-            .doc("Pojkt7nFJXhJos6v5fno7PyggKR2")
+            .doc(uid)
             .collection('userBook')
             .get()
 

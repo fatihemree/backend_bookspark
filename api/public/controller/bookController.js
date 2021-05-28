@@ -1,6 +1,6 @@
 import Util from '../../utils/utils'
 import BookServices from '../services/bookService'
-
+import Scrapping from '../../utils/scrapping'
 const util = new Util()
 
 export default class BookController {
@@ -8,9 +8,8 @@ export default class BookController {
     static async search(req, res) {
         try {
             const query = req.query.q;
-            const result = await BookServices.search(query)
-            const books = result.data.sonuclar.filter(item => item.turu === 'kitap')
-            util.setSuccess(200, '', books)
+            const result = await Scrapping(query)
+            util.setSuccess(200, 'Arama Tamamlandı', result)
             return util.send(res)
         } catch (error) {
             util.setSuccess(404, 'Arama Başarısız', error)
@@ -22,7 +21,7 @@ export default class BookController {
             const query = req.query.q;
             const result = await BookServices.trend(1)
             // console.log(istek)
-            const trendList= result.data.gonderiler
+            const trendList = result.data.gonderiler
             util.setSuccess(200, '', trendList)
             return util.send(res)
         } catch (error) {
