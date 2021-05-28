@@ -6,6 +6,7 @@ const app = express()
 // app.get('/allUsers', userController.allUsers)
 // app.get('/signout', userController.signOut)
 // app.post('/delete/:uid', userController.delete)
-app.get('/addBook/:id',bookController.saveBook)
+app.post('/addBook',bookController.saveBook)
+app.get('/allBook',bookController.allBook)
 
 module.exports = app;
