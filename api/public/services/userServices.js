@@ -17,10 +17,6 @@ export default class UserSevice {
   //         .signOut()
   // }
 
-  // static async token(user) {
-  //     return await admin
-  //     .messaging().
-  // }
 
   static async login(params) {
     params.returnSecureToken = true;
@@ -29,11 +25,11 @@ export default class UserSevice {
         'Content-Type': 'application/json',
       }
     })
-    return result.data
+    return result
   }
 
   static async userSave(uid,user) {
-    console.log(uid,user)
+    // console.log(uid,user)
     return await admin
       .firestore()
       .collection('users')

@@ -84,13 +84,8 @@ export const emailValidate = (email) => {
 */
 export const bookSaveValidation = (object) => {
   const bookSave = Joi.object({
-    isReadyPage: Joi.array().items(Joi.object({
-      date: Joi.date().required(),
-      pageNumber: Joi.number().required()
-    })),
+    isbn: Joi.string().length(13).required(),
     status: Joi.number().required(),
-    startDate: Joi.date().required(),
-    endDate: Joi.date().required(),
   })
 
   const result = bookSave.validate(object, { abortEarly: false })

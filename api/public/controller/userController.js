@@ -68,11 +68,13 @@ export default class UserController {
         return util.send(res)
       }
       const result = await userServices.login(user)
-      util.setSuccess(200, 'login success', result)
+      util.setSuccess(200, 'login success', result.data)
       return util.send(res)
+
     }
     catch (error) {
-      util.setErrorFirebase(res, error)
+      util.setError(error.response.data.error.code,error.response.data.error.message)
+      return util.send(res)
     }
   }
 
@@ -106,10 +108,8 @@ export default class UserController {
       return util.send(res)
     }
     catch (err) {
-      // console.log(err)
-      util.setError(404, err)
+      util.setError(400,err.message)
       return util.send(res)
-      // return util.setErrorFirebase(res,err)
     }
   }
 
